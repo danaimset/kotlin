@@ -66,16 +66,16 @@ internal abstract class AbstractSimpleScopeTowerProcessor<C : Candidate>(
     fun createCandidates(
         collector: Collection<CandidateWithBoundDispatchReceiver>,
         kind: ExplicitReceiverKind,
-        receiver: ReceiverValueWithSmartCastInfo?
-    ) : Collection<C> {
+        extensionReceiver: ReceiverValueWithSmartCastInfo?
+    ): Collection<C> {
         val result = mutableListOf<C>()
         for (candidate in collector) {
-            if (candidate.requiresExtensionReceiver == (receiver != null)) {
+            if (candidate.requiresExtensionReceiver == (extensionReceiver != null)) {
                 result.add(
                     candidateFactory.createCandidate(
                         candidate,
                         kind,
-                        extensionReceiver = receiver
+                        extensionReceiver = extensionReceiver
                     )
                 )
             }
@@ -101,6 +101,11 @@ internal class ExplicitReceiverScopeTowerProcessor<C : Candidate>(
                 null
             )
             is TowerData.TowerLevel -> createCandidates(
+                data.level.collectCandidates(explicitReceiver),
+                ExplicitReceiverKind.EXTENSION_RECEIVER,
+                explicitReceiver
+            )
+            is TowerData.BothTowerLevelAndImplicitReceiver -> createCandidates(
                 data.level.collectCandidates(explicitReceiver),
                 ExplicitReceiverKind.EXTENSION_RECEIVER,
                 explicitReceiver

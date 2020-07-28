@@ -444,7 +444,7 @@ class NewResolutionOldInference(
             val candidateCall = ResolvedCallImpl(
                 basicCallContext.call, towerCandidate.descriptor,
                 towerCandidate.dispatchReceiver?.receiverValue, extensionReceiver?.receiverValue,
-                explicitReceiverKind, null, candidateTrace, tracing,
+                explicitReceiverKind, listOf(), null, candidateTrace, tracing,
                 basicCallContext.dataFlowInfoForArguments // todo may be we should create new mutable info for arguments
             )
 

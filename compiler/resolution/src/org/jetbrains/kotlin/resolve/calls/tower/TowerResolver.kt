@@ -65,6 +65,7 @@ sealed class TowerData {
     class OnlyImplicitReceiver(val implicitReceiver: ReceiverValueWithSmartCastInfo) : TowerData()
     class TowerLevel(val level: ScopeTowerLevel) : TowerData()
     class BothTowerLevelAndImplicitReceiver(val level: ScopeTowerLevel, val implicitReceiver: ReceiverValueWithSmartCastInfo) : TowerData()
+
     // Has the same meaning as BothTowerLevelAndImplicitReceiver, but it's only used for names lookup, so it doesn't need implicit receiver
     class ForLookupForNoExplicitReceiver(val level: ScopeTowerLevel) : TowerData()
 }
