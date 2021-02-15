@@ -11,7 +11,7 @@ enum class DceMode {
     THROWING_EXCEPTION;
 
     companion object {
-        val DEFAULT = REMOVAL_DECLARATION
+        val DEFAULT = THROWING_EXCEPTION
     }
 }
 
